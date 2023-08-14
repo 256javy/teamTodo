@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const logger = require('../config/winston');
 
-/* GET home page. */
+/* GET welcome message */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  logger.info("GET /");
+  res.json({"message": "Welcome to the backend!"});
 });
 
 module.exports = router;
