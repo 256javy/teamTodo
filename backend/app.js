@@ -4,8 +4,8 @@ let cookieParser = require('cookie-parser');
 let morgan = require('morgan');
 
 let winston = require('./config/winston');
-
 let indexRouter = require('./routes/index');
+let mongoose = require('./db/conn');
 
 let app = express();
 
@@ -18,10 +18,10 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 
 //error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     //set locals, only providing error in development
     res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development'? err: {};
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // include winston logging
     winston.error(
@@ -30,7 +30,7 @@ app.use(function(err, req, res, next) {
 
     //render the error page
     res.status(err.status || 500);
-    res.json({"message": "An error occurred"});
+    res.json({ "message": "An error occurred" });
 });
 
 module.exports = app;
