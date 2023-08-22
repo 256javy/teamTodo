@@ -8,4 +8,7 @@ router.get('/', function(req, res, next) {
   res.json({"message": "Welcome to the backend!"});
 });
 
+
+router.use('/users', require('./usersController.js'));
+
 module.exports = router;

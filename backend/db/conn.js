@@ -4,7 +4,9 @@ const winston = require('../config/winston');
 main().catch(err => winston.error(err));
 
 async function main() {
-    await mongoose.connect('mongodb://root:rootpassword@localhost:27017');
+    const uri = process.env.MONGODB_URI;
+    winston.debug('Trying to connect: '+ uri);
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     winston.info('Connected to MongoDB...');
 }
 
