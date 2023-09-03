@@ -9,6 +9,9 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.use('/users', require('./usersController.js'));
+router.use('/users', require('./users.js'));
+router.use('/categories', require('./categories.js'));
+router.use('/tasks', require('./tasks.js'));
+
 
 module.exports = router;
