@@ -1,3 +1,5 @@
+let dotenv = require('dotenv');
+let cors = require('cors');
 let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
@@ -8,6 +10,23 @@ let indexRouter = require('./routes/index');
 let mongoose = require('./db/conn');
 
 let app = express();
+dotenv.config();
+
+const whitelist = [process.env.FRONTEND_URL];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (whitelist.includes(origin)) {
+            //puede consultar la api
+            callback(null, true);
+        } else {
+            //no puede consultar la api
+            callback(new Error('No permitido por CORS'));
+        }
+    },
+}
+
+app.use(cors(corsOptions));
 
 app.use(morgan('combined', { stream: winston.stream }));
 app.use(express.json());
