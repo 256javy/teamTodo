@@ -58,7 +58,6 @@ body{
   padding: 10px;
   border: 1px solid #ffffff;
   color: #ffffff;
-  /*que el fondo sea mas claro*/
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -79,11 +78,6 @@ body{
   gap: 10px;
 }
 
-/*estilos para el modal modalcontainer, modaladduser que es el formulario y tiene modaladduser__field, modaladduser__label, modaladduser__input y modaladduser__submit*/
-/*que al abrirse el fondo restante sea opaco*/
-/*que respete  el tema actual*/
-/* el contenedor de el modal debe cubrir toda la pantalla y dar un fondo opacp */
-/* el modal debe tener un fondo que respete el tema y estar centrado*/
 .modalcontainer{
   position: fixed;
   top: 0;
@@ -128,7 +122,6 @@ body{
   padding: 10px;
   border: 1px solid #ffffff;
   color: #ffffff;
-  /*que el fondo sea mas claro*/
   background-color: rgba(255, 255, 255, 0.1);
 }
 
