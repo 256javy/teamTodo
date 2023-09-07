@@ -140,7 +140,7 @@ body{
   width: var(--gap-50);
 }
 
-.adduser{
+.form{
   background-color: var(--gray-light);
   padding: var(--gap-50);
   border-radius: var(--gap-10);
@@ -148,19 +148,19 @@ body{
   max-width: 500px;
 }
 
-.adduser__field{
+.form__field{
   display: flex;
   flex-direction: column;
   gap: var(--gap-10);
   margin-bottom: var(--gap-25);
 }
 
-.adduser__label{
+.form__label{
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.adduser__input{
+.form__input{
   padding: var(--gap-10);
   border-radius: var(--gap-5);
   border: 1px solid var(--gray);
@@ -168,7 +168,7 @@ body{
   color: var(--white);
 }
 
-.adduser__submit{
+.form__submit{
   font-weight: bold;
   font-size: 1.2rem;
   padding: var(--gap-10);
@@ -180,7 +180,7 @@ body{
   width: 100%;
 }
 
-.adduser__submit--disabled{
+.form__submit--disabled{
   cursor: not-allowed;
   color: rgba(255, 255, 255, 0.5);
   background-color: rgba(0, 128, 0, 0.5);
@@ -245,16 +245,30 @@ body{
 /* user */
 
 .user {
-  box-shadow: 0px 0px 10px var(--shadown);
-  padding: var(--gap-25);
+  background-color: var(--gray-light);
+  padding: var(--gap-50);
   border-radius: var(--gap-10);
-  background-color: var(--gray);
   width: 100%;
+  max-width: 500px;
+}
+
+.user__header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--gap-25);
+  gap: var(--gap-10);
 }
 
 .user__name{
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.user__addtask{
+  cursor: pointer;
+  width: var(--gap-25);
+  background-color: var(--green-light);
 }
 
 
