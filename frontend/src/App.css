@@ -118,15 +118,6 @@ body{
   }
 }
 
-/* modal */
-/* tengo el modal div con la clase modal y un hijo que es la x para cerrar el modal con la clase modal__close */
-/* a parte de modal__close tiene un hijo que es el contenido del modal, en este caso un formulario con la clase adduser */
-/* adduser tiene divs que contienen a los labels e input, estos divs tienen la clase adduser__field */
-/* tenemos los adduser__label y los adduser__input */
-/* el boton de enviar tiene la clase adduser__submit y no esta en un adduser__field */
-/* hacer un modal que respete el tema(oscuro) que este centrado y que sea adaptable a las distintas pantallas */
-/* tambien que el fondo fuera del modal sea opaco en el momento que el modal este abierto */
-/* ponerle una buena ubicacion tambien al modal__close */
 .modal{
   position: fixed;
   top: 0;
@@ -197,7 +188,6 @@ body{
   background-size: 10px 10px;
   background-position: 0 0;
   animation: move 1s linear infinite;
-  /* oscurecer la letra */
 }
 
 @keyframes move{
