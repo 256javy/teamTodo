@@ -19,8 +19,11 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     },
     updatedAt:{
-        type: Date,
-        default: Date.now
+        type: Date
+    },
+    deleted: {
+        type: Boolean,
+        default: false
     }
 });
 

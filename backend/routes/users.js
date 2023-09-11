@@ -7,10 +7,10 @@ const logger = require('../config/winston');
 
 const User = require('../models/user');
 
-// GET all users
+// GET all users with deleted = false
 router.get('/', async (req, res, next) => {
     try {
-        const users = await User.find();
+        const users = await User.find({ deleted: false });
         res.json(users);
     } catch (err) {
         next(err);
@@ -66,17 +66,15 @@ router.patch('/:id', getUser, async (req, res, next) => {
 );
 
 // DELETE one user
-// FIXME !!!
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', getUser, async (req, res, next) => {
     try {
-        User.deleteOne({id: req.params.id})
-
-        res.json({ "message": "Deleted user" });
+        res.user.deleted = false;
+        await res.user.save()
+        res.status(204).send();
     } catch (err) {
         next(err);
     }
-}
-);
+});
 
 // middleware function to get a user by id with mongoose
 async function getUser(req, res, next) {
@@ -94,5 +92,39 @@ async function getUser(req, res, next) {
         next(err);
     }
 }
+
+// post query user
+router.post('/query', async (req, res, next) => {
+    try {
+        let query = User.find();
+        if (req.body.name != null) {
+            query = query.where('name').regex(new RegExp(req.body.name, 'i'));
+        }
+        if (req.body.email != null) {
+            query = query.where('email').regex(new RegExp(req.body.email, 'i'));
+        }
+        const users = await query.exec();
+        res.json(users);
+    } catch (err) {
+        next(err);
+    }
+});
+
+// get by email
+router.get('/email/:email', async (req, res, next) => {
+    let user;
+    try {
+        user = await User.findOne({ email: req.params.email });
+        if (user == null) {
+            return res.status(404).json({ message: 'Cannot find user' });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+    res.user = user;
+    next();
+});
+
+
 
 module.exports = router;
