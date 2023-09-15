@@ -68,7 +68,7 @@ router.patch('/:id', getUser, async (req, res, next) => {
 // DELETE one user
 router.delete('/:id', getUser, async (req, res, next) => {
     try {
-        res.user.deleted = false;
+        res.user.deleted = true;
         await res.user.save()
         res.status(204).send();
     } catch (err) {

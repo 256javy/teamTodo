@@ -57,7 +57,7 @@ const AddUser = () => {
                 <label className="form__label" htmlFor="password">
                     Contraseña del usuario
                 </label>
-                <input value={password} autoComplete='off' onChange={e => setPassword(e.target.value)} type="text" id="password" placeholder="Ingresa el password del usuario" className="form__input" />
+                <input value={password} autoComplete='off' onChange={e => setPassword(e.target.value)} type="password" id="password" placeholder="Ingresa el password del usuario" className="form__input" />
             </div>
             <input disabled={sending} type="submit" className={`form__submit ${sending ? 'form__submit--disabled' : ''}`} />
         </form>

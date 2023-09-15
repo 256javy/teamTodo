@@ -124,6 +124,37 @@ const TaskProvider = ({ children }) => {
         setModal(true);
     }
 
+    const handleDelete = async (type, id) => {
+        const isConfirmed = window.confirm('¿Estas seguro de eliminar?');
+        if (!isConfirmed) {
+            return;
+        }
+        try {
+            if (type === 'user') {
+                await clienteAxios.delete(`/users/${id}`);
+                setUsers(prevState => prevState.filter(user => user._id !== id));
+                handleAlert('Usuario eliminado correctamente', 'normal');
+            }
+            if (type === 'category') {
+                await clienteAxios.delete(`/categories/${id}`);
+                setCategories(prevState => prevState.filter(category => category._id !== id));
+                handleAlert('Categoria eliminada correctamente', 'normal');
+            }
+            if (type === 'task') {
+                await clienteAxios.delete(`/tasks/${id}`);
+                setTasks(prevState => prevState.filter(task => task._id !== id));
+                handleAlert('Tarea eliminada correctamente', 'normal');
+            }
+        } catch (error) {
+            handleAlert(`Hubo un error al eliminar ${type}`);
+        }
+    }
+
+    const getTasksByUserId = (id) => {
+        const tasksByUserId = tasks.filter(task => task.userId === id);
+        return tasksByUserId;
+    }
+
     return (
         <TaskContext.Provider value={
             {
@@ -138,7 +169,9 @@ const TaskProvider = ({ children }) => {
                 addCategory,
                 tasks,
                 addTask,
-                addTaskuserId
+                addTaskuserId,
+                handleDelete,
+                getTasksByUserId
             }
         }>
             {children}
