@@ -1,4 +1,6 @@
 /* Definir variables */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;400;700&display=swap');
+
 :root {
   --white: #ffffff;
   --black: #000000;
@@ -9,7 +11,6 @@
   --green-dark: #008000;
   --green-light: #06d206;
   --shadown: rgba(0, 0, 0, 0.3);
-  /* baja: verde, media: amarillo, alta: naranja, urgente: rojo */
   --priority-low: #0dc00d;
   --priority-medium: #ffd700;
   --priority-high: #ffa500;
