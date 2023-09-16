@@ -54,6 +54,14 @@ textarea{
   resize: vertical;
 }
 
+button{
+  /* quitarle los estilos por defecto */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
 /* BEM Components */
 
 
@@ -360,6 +368,8 @@ textarea{
   display: flex;
   flex-direction: column;
   gap: var(--gap-10);
+  max-height: 250px;
+  overflow-y: scroll;
 }
 
 /* al tastkpreview ponerle un pequeño bordecito blanco */
@@ -377,6 +387,18 @@ textarea{
 .taskpreview__name{
   font-size: .9rem;
   font-weight: bold;
+}
+
+.taskpreview__button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-5);
+}
+
+.taskpreview__edit{
+  cursor: pointer;
+  width: var(--gap-25);
 }
 
 .taskpreview__priority{

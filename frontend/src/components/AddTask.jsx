@@ -31,7 +31,6 @@ const AddTaskForm = () => {
                 userId: addTaskuserId,
                 createdBy: addTaskuserId//TODO: cambiar por el id del usuario logueado
             }
-            console.log(task)
             await addTask(task);
             setTaskName('');
             setTaskDescription('');

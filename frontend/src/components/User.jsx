@@ -18,9 +18,9 @@ const User = ({ userName, id }) => {
           </svg>
         </div>
       </header>
-      <Tasks userid={id} />
+      <Tasks userId={id} />
     </article>
-  )
+    )
 }
 
 

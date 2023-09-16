@@ -3,26 +3,33 @@ import { useEffect, useState } from "react";
 import useTask from "../hooks/useTask"
 import TaskPreview from "./TaskPreview";
 
-const Tasks = ({ userid }) => {
+const Tasks = ({ userId }) => {
 
     const [userTasks, setUserTasks] = useState([]);
 
-    const { tasks, getTasksByUserId } = useTask();
+    const {  addetTaskUserId, getTasksByUserId } = useTask();
+
+    const getTasks = async () => {
+        const tasks = await getTasksByUserId(userId);
+        setUserTasks(tasks);
+    }
 
     useEffect(() => {
-        const taskResult = getTasksByUserId(userid);
-        console.log(taskResult);
-        setUserTasks(taskResult);
-    }, [tasks]);
+        getTasks();
+    }, [addetTaskUserId]); 
+
+    useEffect(() => {
+        if (addetTaskUserId === userId) {
+            getTasks();
+        }
+    }, [addetTaskUserId]);    
 
     return (
-        <div className="tasks">
+        <ul className="tasks">
             {
-                userTasks.map(task => (
-                    <TaskPreview key={task._id} task={task}/>
-                ))
+                userTasks.map(task => <TaskPreview key={task._id} task={task} />)
             }
-        </div>
+        </ul>
     )
 }
 
