@@ -13,6 +13,7 @@ const TaskProvider = ({ children }) => {
     const [modalFor, setModalFor] = useState('');
     const [addTaskuserId, setAddTaskuserId] = useState('');
     const [addetTaskUserId, setAddetTaskUserId] = useState('');
+    const [taskToEdit, setTaskToEdit] = useState({});
 
     useEffect(() => {
         const getUsers = async () => {
@@ -96,14 +97,17 @@ const TaskProvider = ({ children }) => {
         setAlertTimeout(timeoutId);
     }
 
-    const handleModal = (modalFor, userId) => {
+    const handleModal = (modalFor, userId, task) => {
         if (modal) {
             setModal(false);
             setModalFor('');
             return;
         }
+        setAddetTaskUserId('');
         if (modalFor === 'addTask') {
             setAddTaskuserId(userId);
+        } else if (modalFor === 'editTask') {
+            setTaskToEdit(task);
         }
         setModalFor(modalFor);
         setModal(true);
@@ -145,6 +149,17 @@ const TaskProvider = ({ children }) => {
         return tasks;
     }
 
+    const editTask = async (task, userId) => {
+        try {
+            await clienteAxios.patch(`/tasks/${task.id}`, task);
+            handleAlert('Tarea editada correctamente', 'normal');
+            setTaskToEdit({});
+            setAddetTaskUserId(userId);
+        } catch (error) {
+            handleAlert('Hubo un error al editar la tarea')
+        }
+    }
+
     return (
         <TaskContext.Provider value={
             {
@@ -161,7 +176,9 @@ const TaskProvider = ({ children }) => {
                 addTaskuserId,
                 handleDelete,
                 getTasksByUserId,
-                addetTaskUserId
+                addetTaskUserId,
+                taskToEdit,
+                editTask
             }
         }>
             {children}

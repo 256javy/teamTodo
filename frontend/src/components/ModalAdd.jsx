@@ -2,10 +2,11 @@ import useTask from '../hooks/useTask';
 import AddUser from './AddUser';
 import AddCategory from './AddCategory';
 import AddTask from './AddTask';
+import EditTask from './EditTask';
 
 const ModalAdd = () => {
 
-    const { handleModal, modalFor } = useTask();
+    const { handleModal, modalFor, taskToEdit } = useTask();
 
     return (
         <div className='modal'>
@@ -15,7 +16,8 @@ const ModalAdd = () => {
             {
                 modalFor === 'addUser' && <AddUser /> ||
                 modalFor === 'addCategory' && <AddCategory /> ||
-                modalFor === 'addTask' && <AddTask />
+                modalFor === 'addTask' && <AddTask /> ||
+                modalFor === 'editTask' && <EditTask taskToEdit={taskToEdit} />
             }
         </div>
     )
