@@ -307,7 +307,7 @@ textarea{
 
 .user__header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: var(--gap-25);
   gap: var(--gap-10);
@@ -316,6 +316,11 @@ textarea{
 .user__name {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.user__buttons{
+  display: flex;
+  gap: var(--gap-10);
 }
 
 .user__addtask,
