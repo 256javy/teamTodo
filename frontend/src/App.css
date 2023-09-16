@@ -16,6 +16,7 @@
   --priority-high: #ffa500;
   --priority-urgent: #ff0000;
 
+  --border-1: 0.0625rem;
   --gap-5: 0.3125rem;
   --gap-10: 0.625rem;
   --gap-20: 1.25rem;
@@ -38,13 +39,20 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: var(--gray);
+html {
+    /* 1rem */
   font-size: 16px;
-  /* 1rem */
+}
+
+body{
+  background-color: var(--gray);
+  font-size: 1rem;
   font-family: var(--font-family);
 }
 
+textarea{
+  resize: vertical;
+}
 
 /* BEM Components */
 
@@ -58,7 +66,7 @@ body {
   margin: var(--gap-25);
   top: 0;
   left: 0;
-  width: 300px;
+  width: var(--gap-100)*3;
   animation: alert 0.5s ease-in-out;
   z-index: 20;
 }
@@ -107,6 +115,7 @@ body {
 .alert__message {
   font-size: 1rem;
   font-weight: bold;
+  padding-inline: var(--gap-10);
 }
 
 @keyframes alert {
@@ -174,7 +183,7 @@ body {
 .form__input {
   padding: var(--gap-10);
   border-radius: var(--gap-5);
-  border: 1px solid var(--gray);
+  border: var(--border-1) solid var(--gray);
   background-color: var(--gray);
   color: var(--white);
   text-transform: none;
@@ -185,7 +194,7 @@ body {
   font-size: 1.2rem;
   padding: var(--gap-10);
   border-radius: var(--gap-5);
-  border: 1px solid var(--gray);
+  border: var(--border-1) solid var(--gray);
   background-color: var(--green-dark);
   color: var(--white);
   cursor: pointer;
@@ -205,8 +214,8 @@ body {
   cursor: not-allowed;
   color: rgba(255, 255, 255, 0.5);
   background-color: rgba(0, 128, 0, 0.5);
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0, 0, 0, 0.5) 5px, rgba(0, 0, 0, 0.5) 10px);
-  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent var(--gap-5), rgba(0, 0, 0, 0.5) var(--gap-5), rgba(0, 0, 0, 0.5) var(--gap-10));
+  background-size: var(--gap-10) var(--gap-10);
   background-position: 0 0;
   animation: move 1s linear infinite;
 }
@@ -217,7 +226,7 @@ body {
   }
 
   100% {
-    background-position: 10px 10px;
+    background-position: var(--gap-10) var(--gap-10);
   }
 }
 
@@ -232,11 +241,11 @@ body {
 
 .header__button {
   margin-block-start: var(--gap-25);
-  padding: 5px;
+  padding: var(--gap-5);
   background-color: var(--green-dark);
   color: var(--white);
   border-radius: var(--gap-5);
-  border: 1px solid var(--gray);
+  border: var(--border-1) solid var(--gray);
   cursor: pointer;
   padding: var(--gap-10);
   font-weight: bold;
@@ -337,7 +346,7 @@ body {
 
 /* al tastkpreview ponerle un pequeño bordecito blanco */
 .taskpreview{
-  border: 1px solid var(--white);
+  border: var(--border-1) solid var(--white);
   border-radius: var(--gap-5);
   padding: var(--gap-10);
   display: flex;
