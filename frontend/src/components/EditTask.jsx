@@ -3,7 +3,7 @@ import useTask from '../hooks/useTask';
 
 const AddTaskForm = ({taskToEdit}) => {
 
-    const { editTask, handleModal, handleAlert } = useTask();
+    const { updateTask, handleModal, handleAlert } = useTask();
 
     const [taskName, setTaskName] = useState(taskToEdit.name);
     const [taskDescription, setTaskDescription] = useState(taskToEdit.description);
@@ -26,7 +26,7 @@ const AddTaskForm = ({taskToEdit}) => {
                 description: taskDescription,
                 dueDate: taskDueDate,
             }
-            await editTask(task, taskToEdit.userId);
+            await updateTask(task, taskToEdit.userId);
             setTaskName('');
             setTaskDescription('');
             setTaskDueDate('');
@@ -38,6 +38,26 @@ const AddTaskForm = ({taskToEdit}) => {
             setSending(false);
         }
     };
+
+    const handleDeleteTask = async ()  => {//TODO: Agregar alerta de confirmacion
+        setSending(true);
+        try {
+            const task = {
+                id: taskToEdit._id,
+                status: 'Deleted'
+            }
+            await updateTask(task, taskToEdit.userId);
+            setTaskName('');
+            setTaskDescription('');
+            setTaskDueDate('');
+            handleModal();
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setSending(false);
+        }
+    }
 
     return (
         <form className="form" onSubmit={handleEditTask}>
@@ -76,7 +96,8 @@ const AddTaskForm = ({taskToEdit}) => {
                     onChange={(event) => setTaskDueDate(event.target.value)}
                 />
             </div>
-            <input disabled={sending} type="submit" className={`form__submit ${sending ? 'form__submit--disabled' : ''}`} />
+            <input disabled={sending} type="submit" className={`form__submit ${sending ? 'form__submit--disabled' : ''}`} value="Guardar Cambios"/>
+            <input disabled={sending} type="button" className={`form__submit form__submit--delete ${sending ? 'form__submit--disabled' : ''}`} value="Eliminar Tarea" onClick={handleDeleteTask}/>
         </form>
     );
 }

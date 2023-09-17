@@ -241,6 +241,10 @@ button{
   animation: move 1s linear infinite;
 }
 
+.form__submit--delete{
+  background-color: var(--red-dark);
+}
+
 @keyframes move {
   0% {
     background-position: 0 0;
@@ -424,4 +428,67 @@ button{
 
 .taskpreview__priority--urgent{
   background-color: var(--priority-urgent);
+}
+
+.taskpreview__category{
+  font-weight: bold;
+  font-size: 0.8rem;
+  border-radius: var(--gap-5);
+  padding: var(--gap-5);
+  display: inline-block;
+  color: var(--white);
+}
+
+.taskpreview__info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-5);
+}
+
+/* Filtros de tareas */
+.filters{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-10);
+  margin-block-end: var(--gap-25);
+}
+
+.filter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-5);
+}
+
+.filter__label{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.filter__select{
+  padding: var(--gap-10);
+  border-radius: var(--gap-5);
+  border: var(--border-1) solid var(--gray);
+  background-color: var(--gray);
+  color: var(--white);
+  text-transform: none;
+  width: 100%;
+  max-width: 500px;
+}
+
+.filter__option{
+  padding: var(--gap-10);
+  border-radius: var(--gap-5);
+  border: var(--border-1) solid var(--gray);
+  background-color: var(--gray);
+  color: var(--white);
+  text-transform: none;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
 }

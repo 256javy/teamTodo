@@ -138,10 +138,11 @@ const TaskProvider = ({ children }) => {
         }
     }
 
-    const getTasksByUserId = async userId => {
+
+    const getTasksByUserId = async filters => {
         let tasks = [];
         try{
-            const {data} =  await clienteAxios.get(`/tasks/user/${userId}`);
+            const {data} =  await clienteAxios.post('/tasks/query/', filters);
             tasks = data;
         } catch (error) {   
             console.log(error);
@@ -149,7 +150,7 @@ const TaskProvider = ({ children }) => {
         return tasks;
     }
 
-    const editTask = async (task, userId) => {
+    const updateTask = async (task, userId) => {
         try {
             await clienteAxios.patch(`/tasks/${task.id}`, task);
             handleAlert('Tarea editada correctamente', 'normal');
@@ -158,6 +159,17 @@ const TaskProvider = ({ children }) => {
         } catch (error) {
             handleAlert('Hubo un error al editar la tarea')
         }
+    }
+
+    const getCategory = async categoryId => {
+        let category = {};
+        try{
+            const {data} =  await clienteAxios.get(`/categories/${categoryId}`);
+            category = data;
+        } catch (error) {   
+            console.log(error);
+        }
+        return category;
     }
 
     return (
@@ -178,7 +190,8 @@ const TaskProvider = ({ children }) => {
                 getTasksByUserId,
                 addetTaskUserId,
                 taskToEdit,
-                editTask
+                updateTask,
+                getCategory
             }
         }>
             {children}
