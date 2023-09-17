@@ -166,6 +166,25 @@ router.post('/query', async (req, res, next) => {
         const query = Task.find();
         query.setOptions({ lean: true });
         query.collection(Task.collection);
+        
+        if (req.body.skip != null) {
+            query.skip(req.body.skip);
+        } else if (req.body.page != null && req.body.limit != null) {
+            query.skip((req.body.page - 1) * req.body.limit);
+        }
+
+        if (req.body.limit != null) {
+            query.limit(req.body.limit);
+        } else{
+            query.limit(20);
+        }
+
+        if (req.body.sort != null) {
+            query.sort(req.body.sort);
+        }else{
+            query.sort({ createdAt: 'asc' });
+        }
+
         if (req.body.name != null) {
             query.where('name').regex(new RegExp(req.body.name, 'i'));
         }
