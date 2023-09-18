@@ -11,15 +11,15 @@ const TaskProvider = ({ children }) => {
     const [alertTimeout, setAlertTimeout] = useState(null);
     const [categories, setCategories] = useState([]);
     const [modalFor, setModalFor] = useState('');
-    const [tasks, setTasks] = useState([]);
     const [addTaskuserId, setAddTaskuserId] = useState('');
+    const [addetTaskUserId, setAddetTaskUserId] = useState('');
+    const [taskToEdit, setTaskToEdit] = useState({});
 
     useEffect(() => {
         const getUsers = async () => {
             try {
                 const { data } = await clienteAxios.get('/users');
                 setUsers(data);
-                console.log(data);
             } catch (error) {
                 handleAlert('Hubo un error al obtener los usuarios');
             }
@@ -32,25 +32,11 @@ const TaskProvider = ({ children }) => {
             try {
                 const { data } = await clienteAxios.get('/categories');
                 setCategories(data);
-                console.log(data);
             } catch (error) {
                 handleAlert('Hubo un error al obtener las categorias');
             }
         }
         getCategories();
-    }, []);
-
-    useEffect(() => {
-        const getTasks = async () => {
-            try {
-                const { data } = await clienteAxios.get('/tasks');
-                setTasks(data);
-                console.log(data);
-            } catch (error) {
-                handleAlert('Hubo un error al obtener las tareas');
-            }
-        }
-        getTasks();
     }, []);
 
     const addUser = async user => {
@@ -75,9 +61,9 @@ const TaskProvider = ({ children }) => {
 
     const addTask = async task => {
         try {
-            const { data } = await clienteAxios.post('/tasks', task);
-            setTasks(prevState => [...prevState, data]);
+            await clienteAxios.post('/tasks', task);
             handleAlert('Tarea creada correctamente', 'normal');
+            setAddetTaskUserId(task.userId);
         } catch (error) {
             handleAlert('Hubo un error al crear la tarea')
         }
@@ -111,14 +97,19 @@ const TaskProvider = ({ children }) => {
         setAlertTimeout(timeoutId);
     }
 
-    const handleModal = (modalFor, userId) => {
+    const handleModal = (modalFor, userId, task) => {
         if (modal) {
             setModal(false);
             setModalFor('');
             return;
         }
+        setAddetTaskUserId('');
         if (modalFor === 'addTask') {
             setAddTaskuserId(userId);
+        } else if (modalFor === 'editTask') {
+            setTaskToEdit(task);
+        } else if (modalFor === 'viewTask') {
+            setTaskToEdit(task);
         }
         setModalFor(modalFor);
         setModal(true);
@@ -142,7 +133,6 @@ const TaskProvider = ({ children }) => {
             }
             if (type === 'task') {
                 await clienteAxios.delete(`/tasks/${id}`);
-                setTasks(prevState => prevState.filter(task => task._id !== id));
                 handleAlert('Tarea eliminada correctamente', 'normal');
             }
         } catch (error) {
@@ -150,9 +140,49 @@ const TaskProvider = ({ children }) => {
         }
     }
 
-    const getTasksByUserId = (id) => {
-        const tasksByUserId = tasks.filter(task => task.userId === id);
-        return tasksByUserId;
+
+    const getTasksByUserId = async filters => {
+        let tasks = [];
+        try{
+            const {data} =  await clienteAxios.post('/tasks/query/', filters);
+            tasks = data;
+        } catch (error) {   
+            console.log(error);
+        }
+        return tasks;
+    }
+
+    const updateTask = async (task, userId) => {
+        try {
+            await clienteAxios.patch(`/tasks/${task.id}`, task);
+            handleAlert('Tarea editada correctamente', 'normal');
+            setTaskToEdit({});
+            setAddetTaskUserId(userId);
+        } catch (error) {
+            handleAlert('Hubo un error al editar la tarea')
+        }
+    }
+
+    const getCategory = async categoryId => {
+        let category = {};
+        try{
+            const {data} =  await clienteAxios.get(`/categories/${categoryId}`);
+            category = data;
+        } catch (error) {   
+            console.log(error);
+        }
+        return category;
+    }
+
+    const getUserById = async userId => {
+        let user = {};
+        try{
+            const {data} =  await clienteAxios.get(`/users/${userId}`);
+            user = data;
+        } catch (error) {
+            console.log(error);
+        }
+        return user;
     }
 
     return (
@@ -167,11 +197,15 @@ const TaskProvider = ({ children }) => {
                 handleModal,
                 categories,
                 addCategory,
-                tasks,
                 addTask,
                 addTaskuserId,
                 handleDelete,
-                getTasksByUserId
+                getTasksByUserId,
+                addetTaskUserId,
+                taskToEdit,
+                updateTask,
+                getCategory,
+                getUserById
             }
         }>
             {children}
