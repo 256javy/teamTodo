@@ -2,11 +2,18 @@ import useTask from '../hooks/useTask';
 import ModalAdd from '../components/ModalAdd';
 import Users from '../components/Users';
 import Alert from '../components/Alert';
+import { useEffect } from 'react';
 
 
 const Main = () => {
 
   const { alert, modal, handleModal } = useTask();
+
+  useEffect(() => {
+    if (!localStorage.getItem('userId')) {
+      handleModal('selectUser');
+    }
+  }, [])
 
   return (
     <>
