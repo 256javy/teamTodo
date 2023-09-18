@@ -108,6 +108,8 @@ const TaskProvider = ({ children }) => {
             setAddTaskuserId(userId);
         } else if (modalFor === 'editTask') {
             setTaskToEdit(task);
+        } else if (modalFor === 'viewTask') {
+            setTaskToEdit(task);
         }
         setModalFor(modalFor);
         setModal(true);
@@ -172,6 +174,17 @@ const TaskProvider = ({ children }) => {
         return category;
     }
 
+    const getUserById = async userId => {
+        let user = {};
+        try{
+            const {data} =  await clienteAxios.get(`/users/${userId}`);
+            user = data;
+        } catch (error) {
+            console.log(error);
+        }
+        return user;
+    }
+
     return (
         <TaskContext.Provider value={
             {
@@ -191,7 +204,8 @@ const TaskProvider = ({ children }) => {
                 addetTaskUserId,
                 taskToEdit,
                 updateTask,
-                getCategory
+                getCategory,
+                getUserById
             }
         }>
             {children}

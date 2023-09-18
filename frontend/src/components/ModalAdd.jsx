@@ -3,6 +3,7 @@ import AddUser from './AddUser';
 import AddCategory from './AddCategory';
 import AddTask from './AddTask';
 import EditTask from './EditTask';
+import ViewTask from './ViewTask';
 
 const ModalAdd = () => {
 
@@ -17,7 +18,8 @@ const ModalAdd = () => {
                 modalFor === 'addUser' && <AddUser /> ||
                 modalFor === 'addCategory' && <AddCategory /> ||
                 modalFor === 'addTask' && <AddTask /> ||
-                modalFor === 'editTask' && <EditTask taskToEdit={taskToEdit} />
+                modalFor === 'editTask' && <EditTask taskToEdit={taskToEdit} /> ||
+                modalFor === 'viewTask' && <ViewTask task={taskToEdit} />
             }
         </div>
     )

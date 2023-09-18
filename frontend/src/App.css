@@ -393,6 +393,13 @@ button{
   font-weight: bold;
 }
 
+.taskpreview__buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-5);
+}
+
 .taskpreview__button{
   display: flex;
   justify-content: center;
@@ -447,6 +454,11 @@ button{
   gap: var(--gap-5);
 }
 
+.taskpreview__view{
+  cursor: pointer;
+  width: var(--gap-25);
+}
+
 /* Filtros de tareas */
 .filters{
   display: flex;
@@ -492,3 +504,65 @@ button{
   max-width: 500px;
   text-align: center;
 }
+
+/* Taskview */
+.taskview{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-20);
+  background-color: var(--gray-light);
+  padding: var(--gap-50);
+  border-radius: var(--gap-10);
+  width: 100%;
+  max-width: 500px;
+}
+
+.taskview__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-10);
+}
+
+.taskview__name{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--green-light);
+}
+
+.taskview__user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray);
+  padding: var(--gap-5);
+  border-radius: var(--gap-5);
+}
+
+.taskview__usericon{
+  width: var(--gap-20);
+}
+
+.taskview__username{
+  font-size: .8rem;
+}
+
+.taskview__body{
+  min-height: 100px;
+  background-color: var(--gray);
+  padding: var(--gap-10);
+}
+
+.taskview__description{
+  font-size: 1rem;
+  text-align: start;
+}
+
+.taskview__footer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-10);
+  font-size: .9rem;
+  font-weight: bold;
+}
+
