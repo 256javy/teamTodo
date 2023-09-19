@@ -10,7 +10,8 @@ const User = require('../models/user');
 // GET all users with deleted = false
 router.get('/', async (req, res, next) => {
     try {
-        const users = await User.find({ deleted: false });
+        //get all users, deleted = false, sort by name ascending
+        const users = await User.find({ deleted: false }).sort({ name: 1 });
         res.json(users);
     } catch (err) {
         next(err);
