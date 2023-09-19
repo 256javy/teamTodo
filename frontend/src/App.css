@@ -21,6 +21,7 @@
   --gap-10: 0.625rem;
   --gap-20: 1.25rem;
   --gap-25: 1.5625rem;
+  --gap-30: 1.875rem;
   --gap-50: 3.125rem;
   --gap-100: 6.25rem;
 
@@ -170,8 +171,6 @@ button{
   }
 }
 
-
-
 .modal__close {
   position: absolute;
   top: 0;
@@ -263,6 +262,63 @@ button{
   padding: var(--gap-50);
 }
 
+.loginout{
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-10);
+  position: absolute;
+  top: var(--gap-20);
+  right: var(--gap-50);
+  padding: var(--gap-10);
+}
+
+@media screen and (max-width: 768px) {
+  .loginout {
+    position: relative;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    margin-block-start: var(--gap-25);
+  }
+}
+
+.header__h1{
+  margin-block-end: var(--gap-25);
+}
+
+.loggeduser{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-10);
+  background-color: var(--gray);
+  cursor: pointer;
+  padding: var(--gap-10);
+  border-radius: var(--gap-10);
+}
+
+.loggeduser__usericon{  
+  width: var(--gap-30);
+  stroke: var(--green-light);
+}
+
+.loggeduser__name{
+  font-size: 1.2rem;
+  color: var(--green-light);
+  font-weight: bold;
+}
+
+.logout{
+  background-color: var(--gray);
+  padding: var(--gap-10);
+  border-radius: var(--gap-10);
+  cursor: pointer;
+}
+
+.logout__icon{
+  width: var(--gap-30);
+  stroke: var(--red-light);
+}
 
 .header__button {
   margin-block-start: var(--gap-25);
@@ -566,3 +622,118 @@ button{
   font-weight: bold;
 }
 
+/* Login */
+
+.users{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-20);
+  background-color: var(--gray-light);
+  padding: var(--gap-50);
+  border-radius: var(--gap-10);
+  width: 100%;
+  max-width: 500px;
+}
+
+.users__h2{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--green-light);
+}
+
+.users__list{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-10);
+}
+
+.optionuser{
+  background-color: var(--gray);
+  padding: var(--gap-25);
+  border-radius: var(--gap-10);
+  cursor: pointer;
+}
+
+.optionuser:hover{
+  transform: scale(1.1);
+}
+
+.optionuser:active{
+  transform: scale(0.9);
+}
+
+
+
+.optionuser__name{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/*
+confirm
+confirm__h2
+confirm__p
+confirm__buttons
+confirm__button
+confirm__button
+confirm__button--yes
+confirm__button--no
+*/
+
+.confirm{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-20);
+  background-color: var(--gray-light);
+  padding: var(--gap-50);
+  border-radius: var(--gap-10);
+  width: 100%;
+  max-width: 500px;
+}
+
+.confirm__h2{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--green-light);
+}
+
+.confirm__p{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.confirm__buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-10);
+}
+
+.confirm__button{
+  padding: var(--gap-10);
+  border-radius: var(--gap-5);
+  border: var(--border-1) solid var(--gray);
+  background-color: var(--gray);
+  color: var(--white);
+  text-transform: none;
+  width: 100%;
+  max-width: 500px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.confirm__button:hover{
+  transform: scale(1.1);
+}
+
+.confirm__button:active{
+  transform: scale(0.9);
+}
+
+.confirm__button--yes{
+  background-color: var(--green-dark);
+}
+
+.confirm__button--no{
+  background-color: var(--red-dark);
+}

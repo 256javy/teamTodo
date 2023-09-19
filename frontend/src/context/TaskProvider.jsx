@@ -5,6 +5,7 @@ const TaskContext = createContext();
 
 const TaskProvider = ({ children }) => {
 
+    const [userId, setUserId] = useState(localStorage.getItem('userId'));
     const [users, setUsers] = useState([]);
     const [alert, setAlert] = useState({});
     const [modal, setModal] = useState(false);
@@ -14,6 +15,8 @@ const TaskProvider = ({ children }) => {
     const [addTaskuserId, setAddTaskuserId] = useState('');
     const [addetTaskUserId, setAddetTaskUserId] = useState('');
     const [taskToEdit, setTaskToEdit] = useState({});
+    const [confirmALert, serConfirmAlert] = useState(false);
+    const [confirmAlertContent, setConfirmAlertContent] = useState({});
 
     useEffect(() => {
         const getUsers = async () => {
@@ -38,6 +41,10 @@ const TaskProvider = ({ children }) => {
         }
         getCategories();
     }, []);
+
+    const handleUserId = userId => {
+        setUserId(userId);
+    }
 
     const addUser = async user => {
         try {
@@ -185,6 +192,28 @@ const TaskProvider = ({ children }) => {
         return user;
     }
 
+    const handleLogin = () => {
+        if(userId)return;
+        handleModal('selectUser');
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('userId');
+        setUserId('');
+    }
+
+    const handleConfirmAlert = (title, message) => {
+        serConfirmAlert(!confirmALert);
+        if(!confirmALert){
+            setConfirmAlertContent({});
+        }else {
+            setConfirmAlertContent({
+                title,
+                message
+            });
+        }
+    }
+
     return (
         <TaskContext.Provider value={
             {
@@ -205,7 +234,14 @@ const TaskProvider = ({ children }) => {
                 taskToEdit,
                 updateTask,
                 getCategory,
-                getUserById
+                getUserById,
+                userId,
+                handleUserId,
+                handleLogin,
+                handleLogout,
+                confirmALert,
+                handleConfirmAlert,
+                confirmAlertContent
             }
         }>
             {children}
