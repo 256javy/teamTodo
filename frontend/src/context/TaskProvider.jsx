@@ -123,10 +123,6 @@ const TaskProvider = ({ children }) => {
     }
 
     const handleDelete = async (type, id) => {
-        const isConfirmed = window.confirm('¿Estas seguro de eliminar?');
-        if (!isConfirmed) {
-            return;
-        }
         try {
             if (type === 'user') {
                 await clienteAxios.delete(`/users/${id}`);
@@ -150,10 +146,10 @@ const TaskProvider = ({ children }) => {
 
     const getTasksByUserId = async filters => {
         let tasks = [];
-        try{
-            const {data} =  await clienteAxios.post('/tasks/query/', filters);
+        try {
+            const { data } = await clienteAxios.post('/tasks/query/', filters);
             tasks = data;
-        } catch (error) {   
+        } catch (error) {
             console.log(error);
         }
         return tasks;
@@ -172,10 +168,10 @@ const TaskProvider = ({ children }) => {
 
     const getCategory = async categoryId => {
         let category = {};
-        try{
-            const {data} =  await clienteAxios.get(`/categories/${categoryId}`);
+        try {
+            const { data } = await clienteAxios.get(`/categories/${categoryId}`);
             category = data;
-        } catch (error) {   
+        } catch (error) {
             console.log(error);
         }
         return category;
@@ -183,8 +179,8 @@ const TaskProvider = ({ children }) => {
 
     const getUserById = async userId => {
         let user = {};
-        try{
-            const {data} =  await clienteAxios.get(`/users/${userId}`);
+        try {
+            const { data } = await clienteAxios.get(`/users/${userId}`);
             user = data;
         } catch (error) {
             console.log(error);
@@ -193,7 +189,7 @@ const TaskProvider = ({ children }) => {
     }
 
     const handleLogin = () => {
-        if(userId)return;
+        if (userId) return;
         handleModal('selectUser');
     }
 
@@ -202,16 +198,31 @@ const TaskProvider = ({ children }) => {
         setUserId('');
     }
 
-    const handleConfirmAlert = (title, message) => {
+    const handleConfirmAlert = (title, message, data) => {
         serConfirmAlert(!confirmALert);
-        if(!confirmALert){
+        if (confirmALert) {
             setConfirmAlertContent({});
-        }else {
-            setConfirmAlertContent({
-                title,
-                message
-            });
+            return;
         }
+        setConfirmAlertContent({
+            title,
+            message,
+            data
+        });
+    }
+
+    const handleOk = data => {
+        console.log(data);
+        if(data.type == 'user') {
+            handleDelete(data.type, data.userId);
+        }
+        if(data.type == 'task') {
+            updateTask({
+                id: data.id,
+                status: data.status
+            }, data.userId);
+        }
+        handleConfirmAlert();
     }
 
     return (
@@ -241,7 +252,8 @@ const TaskProvider = ({ children }) => {
                 handleLogout,
                 confirmALert,
                 handleConfirmAlert,
-                confirmAlertContent
+                confirmAlertContent,
+                handleOk
             }
         }>
             {children}

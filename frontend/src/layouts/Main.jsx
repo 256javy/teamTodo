@@ -34,7 +34,7 @@ const Main = () => {
     <>
       {alert?.message && <Alert type={alert.type} message={alert.message} />}
       {modal && <ModalAdd />}
-      {confirmALert && <ConfirmAlert title={confirmAlertContent.title} desc={confirmAlertContent.desc} />}
+      {confirmALert && <ConfirmAlert title={confirmAlertContent.title} message={confirmAlertContent.message} data={confirmAlertContent.data} />}
       <header className="header">
         <h1 className="header__h1">Squad Tasks</h1>
         <button className="header__button" onClick={e => handleModal('addUser')}>Añadir Persona</button>

@@ -41,21 +41,21 @@
 }
 
 html {
-    /* 1rem */
+  /* 1rem */
   font-size: 12px;
 }
 
-body{
+body {
   background-color: var(--gray);
   font-size: 1rem;
   font-family: var(--font-family);
 }
 
-textarea{
+textarea {
   resize: vertical;
 }
 
-button{
+button {
   /* quitarle los estilos por defecto */
   background-color: transparent;
   border: none;
@@ -240,9 +240,14 @@ button{
   animation: move 1s linear infinite;
 }
 
-.form__submit--delete{
+.form__submit--delete {
   background-color: var(--red-dark);
 }
+
+.form__submit--delete:active {
+  background-color: var(--red-light);
+}
+
 
 @keyframes move {
   0% {
@@ -262,7 +267,7 @@ button{
   padding: var(--gap-50);
 }
 
-.loginout{
+.loginout {
   display: flex;
   justify-content: space-between;
   gap: var(--gap-10);
@@ -282,11 +287,11 @@ button{
   }
 }
 
-.header__h1{
+.header__h1 {
   margin-block-end: var(--gap-25);
 }
 
-.loggeduser{
+.loggeduser {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -297,25 +302,25 @@ button{
   border-radius: var(--gap-10);
 }
 
-.loggeduser__usericon{  
+.loggeduser__usericon {
   width: var(--gap-30);
   stroke: var(--green-light);
 }
 
-.loggeduser__name{
+.loggeduser__name {
   font-size: 1.2rem;
   color: var(--green-light);
   font-weight: bold;
 }
 
-.logout{
+.logout {
   background-color: var(--gray);
   padding: var(--gap-10);
   border-radius: var(--gap-10);
   cursor: pointer;
 }
 
-.logout__icon{
+.logout__icon {
   width: var(--gap-30);
   stroke: var(--red-light);
 }
@@ -386,7 +391,7 @@ button{
   font-weight: bold;
 }
 
-.user__buttons{
+.user__buttons {
   display: flex;
   gap: var(--gap-10);
 }
@@ -406,25 +411,25 @@ button{
 }
 
 .user__addtask:hover,
-.user__delete:hover{
+.user__delete:hover {
   transform: scale(1.2);
 }
 
 .user__addtask:active,
-.user__delete:active{
+.user__delete:active {
   transform: scale(0.8);
 }
 
-.user__addtask:active{
+.user__addtask:active {
   stroke: var(--green-dark);
 }
 
-.user__delete:active{
+.user__delete:active {
   stroke: var(--red-dark);
 }
 
 /* Task */
-.tasks{
+.tasks {
   display: flex;
   flex-direction: column;
   gap: var(--gap-10);
@@ -433,7 +438,7 @@ button{
 }
 
 /* al tastkpreview ponerle un pequeño bordecito blanco */
-.taskpreview{
+.taskpreview {
   border: var(--border-1) solid var(--white);
   border-radius: var(--gap-5);
   padding: var(--gap-10);
@@ -444,31 +449,31 @@ button{
   gap: var(--gap-10);
 }
 
-.taskpreview__name{
+.taskpreview__name {
   font-size: .9rem;
   font-weight: bold;
 }
 
-.taskpreview__buttons{
+.taskpreview__buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--gap-5);
 }
 
-.taskpreview__button{
+.taskpreview__button {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--gap-5);
 }
 
-.taskpreview__edit{
+.taskpreview__edit {
   cursor: pointer;
   width: var(--gap-25);
 }
 
-.taskpreview__priority{
+.taskpreview__priority {
   font-weight: bold;
   font-size: 0.8rem;
   border-radius: var(--gap-5);
@@ -477,23 +482,23 @@ button{
   color: var(--black);
 }
 
-.taskpreview__priority--low{
+.taskpreview__priority--low {
   background-color: var(--priority-low);
 }
 
-.taskpreview__priority--medium{
+.taskpreview__priority--medium {
   background-color: var(--priority-medium);
 }
 
-.taskpreview__priority--high{
+.taskpreview__priority--high {
   background-color: var(--priority-high);
 }
 
-.taskpreview__priority--urgent{
+.taskpreview__priority--urgent {
   background-color: var(--priority-urgent);
 }
 
-.taskpreview__category{
+.taskpreview__category {
   font-weight: bold;
   font-size: 0.8rem;
   border-radius: var(--gap-5);
@@ -502,7 +507,7 @@ button{
   color: var(--white);
 }
 
-.taskpreview__info{
+.taskpreview__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -510,13 +515,13 @@ button{
   gap: var(--gap-5);
 }
 
-.taskpreview__view{
+.taskpreview__view {
   cursor: pointer;
   width: var(--gap-25);
 }
 
 /* Filtros de tareas */
-.filters{
+.filters {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -525,7 +530,7 @@ button{
   margin-block-end: var(--gap-25);
 }
 
-.filter{
+.filter {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -533,12 +538,12 @@ button{
   gap: var(--gap-5);
 }
 
-.filter__label{
+.filter__label {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.filter__select{
+.filter__select {
   padding: var(--gap-10);
   border-radius: var(--gap-5);
   border: var(--border-1) solid var(--gray);
@@ -549,7 +554,7 @@ button{
   max-width: 500px;
 }
 
-.filter__option{
+.filter__option {
   padding: var(--gap-10);
   border-radius: var(--gap-5);
   border: var(--border-1) solid var(--gray);
@@ -562,7 +567,7 @@ button{
 }
 
 /* Taskview */
-.taskview{
+.taskview {
   display: flex;
   flex-direction: column;
   gap: var(--gap-20);
@@ -573,20 +578,20 @@ button{
   max-width: 500px;
 }
 
-.taskview__header{
+.taskview__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--gap-10);
 }
 
-.taskview__name{
+.taskview__name {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--green-light);
 }
 
-.taskview__user{
+.taskview__user {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -595,26 +600,26 @@ button{
   border-radius: var(--gap-5);
 }
 
-.taskview__usericon{
+.taskview__usericon {
   width: var(--gap-20);
 }
 
-.taskview__username{
+.taskview__username {
   font-size: .8rem;
 }
 
-.taskview__body{
+.taskview__body {
   min-height: 100px;
   background-color: var(--gray);
   padding: var(--gap-10);
 }
 
-.taskview__description{
+.taskview__description {
   font-size: 1rem;
   text-align: start;
 }
 
-.taskview__footer{
+.taskview__footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--gap-10);
@@ -624,7 +629,7 @@ button{
 
 /* Login */
 
-.users{
+.users {
   display: flex;
   flex-direction: column;
   gap: var(--gap-20);
@@ -635,36 +640,36 @@ button{
   max-width: 500px;
 }
 
-.users__h2{
+.users__h2 {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--green-light);
 }
 
-.users__list{
+.users__list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--gap-10);
 }
 
-.optionuser{
+.optionuser {
   background-color: var(--gray);
   padding: var(--gap-25);
   border-radius: var(--gap-10);
   cursor: pointer;
 }
 
-.optionuser:hover{
+.optionuser:hover {
   transform: scale(1.1);
 }
 
-.optionuser:active{
+.optionuser:active {
   transform: scale(0.9);
 }
 
 
 
-.optionuser__name{
+.optionuser__name {
   font-size: 1rem;
   font-weight: bold;
 }
@@ -680,36 +685,52 @@ confirm__button--yes
 confirm__button--no
 */
 
-.confirm{
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-20);
+.confirm {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.80);  
+  z-index: 20;
+}
+
+.confirm__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--gray-light);
   padding: var(--gap-50);
   border-radius: var(--gap-10);
   width: 100%;
   max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-20);
+  align-items: center;
 }
 
-.confirm__h2{
+.confirm__h2 {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--green-light);
 }
 
-.confirm__p{
+.confirm__p {
   font-size: 1rem;
   font-weight: bold;
 }
 
-.confirm__buttons{
+.confirm__buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--gap-10);
+  width: 100%;
 }
 
-.confirm__button{
+.confirm__button {
   padding: var(--gap-10);
   border-radius: var(--gap-5);
   border: var(--border-1) solid var(--gray);
@@ -722,18 +743,18 @@ confirm__button--no
   font-weight: bold;
 }
 
-.confirm__button:hover{
+.confirm__button:hover {
   transform: scale(1.1);
 }
 
-.confirm__button:active{
+.confirm__button:active {
   transform: scale(0.9);
 }
 
-.confirm__button--yes{
+.confirm__button--yes {
   background-color: var(--green-dark);
 }
 
-.confirm__button--no{
+.confirm__button--no {
   background-color: var(--red-dark);
 }

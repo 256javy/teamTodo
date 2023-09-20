@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import useTask from '../hooks/useTask';
 
-const AddTaskForm = ({taskToEdit}) => {
+const AddTaskForm = ({ taskToEdit }) => {
 
-    const { updateTask, handleModal, handleAlert } = useTask();
+    const { updateTask, handleModal, handleAlert, handleConfirmAlert } = useTask();
 
     const [taskName, setTaskName] = useState(taskToEdit.name);
     const [taskDescription, setTaskDescription] = useState(taskToEdit.description);
@@ -14,7 +14,7 @@ const AddTaskForm = ({taskToEdit}) => {
     const handleEditTask = async e => {
         setSending(true);
         e.preventDefault();
-        if (taskName.trim() === '' || taskDescription.trim() === '' ||  taskDueDate.trim() === '') {
+        if (taskName.trim() === '' || taskDescription.trim() === '' || taskDueDate.trim() === '') {
             handleAlert('Todos los campos son obligatorios');
             setSending(false);
             return;
@@ -39,22 +39,23 @@ const AddTaskForm = ({taskToEdit}) => {
         }
     };
 
-    const handleDeleteTask = async ()  => {//TODO: Agregar alerta de confirmacion
+    const handleDeleteTask = async () => {
         setSending(true);
         try {
-            const task = {
-                id: taskToEdit._id,
-                status: 'Deleted'
-            }
-            await updateTask(task, taskToEdit.userId);
-            setTaskName('');
-            setTaskDescription('');
-            setTaskDueDate('');
+            handleConfirmAlert(
+                'Eliminar Tarea',
+                '¿Estas seguro que deseas eliminar esta tarea?',
+                {
+                    type: 'task',
+                    id: taskToEdit._id,
+                    userId: taskToEdit.userId,
+                    status: 'Deleted'
+                }
+            )
             handleModal();
         } catch (error) {
             console.log(error);
-        }
-        finally {
+        } finally {
             setSending(false);
         }
     }
@@ -96,8 +97,8 @@ const AddTaskForm = ({taskToEdit}) => {
                     onChange={(event) => setTaskDueDate(event.target.value)}
                 />
             </div>
-            <input disabled={sending} type="submit" className={`form__submit ${sending ? 'form__submit--disabled' : ''}`} value="Guardar Cambios"/>
-            <input disabled={sending} type="button" className={`form__submit form__submit--delete ${sending ? 'form__submit--disabled' : ''}`} value="Eliminar Tarea" onClick={handleDeleteTask}/>
+            <input disabled={sending} type="submit" className={`form__submit ${sending ? 'form__submit--disabled' : ''}`} value="Guardar Cambios" />
+            <input disabled={sending} type="button" className={`form__submit form__submit--delete ${sending ? 'form__submit--disabled' : ''}`} value="Eliminar Tarea" onClick={handleDeleteTask} />
         </form>
     );
 }
